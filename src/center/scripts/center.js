@@ -1,7 +1,10 @@
-import * as authorservice from '../../services/authorservice';
-import {webchatGetUserInfo} from '../../services/userservice';
+import * as authorservice from '../../toolcase/services/authorservice';
+import {webchatGetUserInfo} from '../../toolcase/services/userservice';
+import ToastService from '../../toolcase/components/toast/toastservice'
+
 let avalonVm = null;
 avalon.ready(()=>{
+    ToastService.getInstance().showLoadingToast();
     avalonVm = avalon.define({
      $id: "C_Center",
      finished: true,
@@ -17,6 +20,8 @@ avalon.ready(()=>{
        } else {
          alert("读取个人信息出错");
        }
+     }).always(function(){
+       ToastService.getInstance().hideLoadingToast();
      });
      avalon.scan(document.body);
    });

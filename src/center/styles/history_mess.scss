@@ -1,6 +1,6 @@
-@function tranPTRem($pxT){
-    @return (($pxT/72)*1rem);
-}
+@import "../../toolcase/common/styles/common.scss";
+@import "../../../node_modules/weui-sass/src/style/widget/weui_tips/weui_toast.scss";
+
 html, body {
     background-color: #ebebeb;
     -ms-touch-action: none;

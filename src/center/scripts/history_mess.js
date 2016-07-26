@@ -1,6 +1,9 @@
-import * as authorservice from '../../services/authorservice';
-import {commonNoticeList} from '../../services/noticeservice';
+import * as authorservice from '../../toolcase/services/authorservice';
+import {commonNoticeList} from '../../toolcase/services/noticeservice';
+import ToastService from '../../toolcase/components/toast/toastservice'
+
 avalon.ready(()=>{
+   ToastService.getInstance().showLoadingToast();
    let avalonVm = avalon.define({
       $id: 'C_history',
       data: [],
@@ -15,7 +18,15 @@ avalon.ready(()=>{
        } else {
          alert(resp.reason);
        }
+       setTimeout(function(){
+         ToastService.getInstance().hideLoadingToast();
+       },2000);
      });
+
+     setTimeout(function(){
+       ToastService.getInstance().showSuccessToast();
+     },5000);
+
      avalon.scan(document.body);
    });
 });
