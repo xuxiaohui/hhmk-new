@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+  <title>通知公告</title>
+  <script src="../../lib/lib-flexible/flexible_all.js"></script>
+  <link rel="stylesheet" href="/center/styles/history_mess.css"/>
+</head>
+<body ms-controller="C_history">
+
+    <div class="container">
+        <ul class="ul-list">
+            <li class="li-item" ms-repeat="data">
+                <div>
+                    <div class="time-container">
+                        <span class="timestemp" ms-text="el.createTime"></span>
+                    </div>
+                    <div class="main-part">
+                        <div class="notice-title no-warp" ms-text="el.noticeTitel?el.noticeTitel:''"></div>
+                        <div class="sub-title" ms-if="el.drName || el.hospitalName">
+                            <span ms-text="el.drName ? el.drName : ''"></span>
+                            <span ms-text="el.hospitalName ? el.hospitalName : ''"></span>
+                        </div>
+                        <div>
+                            <img class="account-bitmap" ms-attr-src="el.noticePhoto ? el.noticePhoto : '../images/notice-default.png'" alt="">
+                        </div>
+
+                        <div class="content" ms-if="el.noticeContent" ms-text="el.noticeContent|truncate(60)"></div>
+                        <span class="read-more clickable"
+                             ontouchstart="touchStyleStart(this)"
+                             ontouchend="touchStyleEnd(this)"
+                             ms-if="el.noticeContent"
+                             ms-click="href(el.noticeUrl)">阅读全文</span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+<script src="../../lib/jquery/jquery-2.1.4.min.js"></script>
+<script>
+  let ua = navigator.userAgent.toLowerCase();
+  if(ua.match(/MicroMessenger/i)=="micromessenger") {
+    $.getScript("../../lib/weixinapi/jweixin-1.0.0.js");
+  }
+</script>
+<script src="../../lib/moment/min/moment.min.js"></script>
+<script src="../../lib/moment/locale/zh-cn.js"></script>
+<script src="../../lib/avalon/avalon.min.js"></script>
+<script src="../scripts/history_mess.js"></script>
+</body>
+</html>

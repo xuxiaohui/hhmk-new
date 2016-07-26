@@ -1,0 +1,94 @@
+@function tranPTRem($pxT){
+    @return (($pxT/72)*1rem);
+}
+html, body {
+    background-color: #ebebeb;
+    -ms-touch-action: none;
+    font-family: 'Microsoft YaHei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif;
+}
+
+.no-warp {
+    white-space: nowrap;
+    overflow: hidden;
+    -webkit-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+
+.container {
+    width: 10rem;
+    margin: 0 auto;
+    position: relative;
+    box-sizing: border-box;
+
+    .ul-list {
+
+        .li-item {
+            margin-bottom: tranPTRem(56);
+
+            &:first-child {
+                margin-top: tranPTRem(56);
+            }
+
+            .time-container {
+                text-align: center;
+
+                .timestemp {
+                    background-color: #CECECE;
+                    color: #FFFFFF;
+                    display: inline-block;
+                    margin: 0 auto tranPTRem(24) auto;
+                    padding: 1% 2%;
+                    font-size: 12px;
+                    border-radius:5px;
+                }
+            }
+
+            .main-part {
+                width: 92%;
+                margin: 0px auto;
+                background-color: #ffffff;
+                box-sizing: border-box;
+                padding: tranPTRem(32);
+
+                .notice-title {
+                    color: #000;
+                    font-size: tranPTRem(32);
+                    font-weight: bold;
+                }
+
+                .sub-title {
+                    color: #989898;
+                    font-size: tranPTRem(22);
+                    margin-top: tranPTRem(18);
+                }
+
+                .account-bitmap {
+                    margin-top: tranPTRem(30);
+                    width: 100%;
+                }
+
+                .content {
+                    font-size: tranPTRem(28);
+                    color: #999999;
+                    margin-top: tranPTRem(10);
+                    word-wrap: break-word;
+                }
+
+                .read-more {
+                    color: #00a378;
+                    font-size: tranPTRem(28);
+                    margin-top: tranPTRem(65);
+                    display: inline-block;
+                    border-radius: 5px;
+                    padding: 3px 5px;
+                    margin-left: -5px;
+                }
+
+                .clickStyle {
+                    background-color: #999999;
+                    color: #ffffff;
+                }
+            }
+        }
+    }
+}

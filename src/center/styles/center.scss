@@ -1,0 +1,219 @@
+@import "../../common/styles/common.scss";
+
+html,body {
+  font-family: 'Microsoft YaHei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif;
+  -ms-touch-action: none;
+  background-color: #EDEBE9;
+  padding-bottom: 3rem;
+}
+
+.center-header {
+  width: 10rem;
+  height: 6.755rem;
+  position: relative;
+  float: left;
+
+  .logo-block {
+    width: 10rem;
+    margin-top: .555rem;
+    height: 2.861rem;
+    float: left;
+
+    .label-outer{
+      height: 2.861rem;
+      width: 2.861rem;
+      margin-left: 50%;
+      -webkit-transform: translateX(-1.4305rem);
+      transform: translateX(-1.4305rem);
+      background-color: #5AD9B6;
+      @include border-radius(1.4305rem);
+      float: left;
+
+      .label-middle {
+        height: 2.583rem;
+        width: 2.583rem;
+        margin-top: 0.139rem;
+        margin-left:0.139rem;
+        background-color: #62ECC6;
+        @include border-radius(1.291rem);
+        float: left;
+
+        .logo {
+          height: 2.2rem;
+          width: 2.2rem;
+          margin-top: 0.195rem;
+          margin-left: 0.195rem;
+          float: left;
+          @include border-radius(1.1rem);
+          /*border: .1rem solid #FFFFFF;*/
+        }
+      }
+    }
+  }
+
+  .name {
+    margin-top: .166rem;
+    font-size: .5rem;
+    color: #ffffff;
+    text-align: center;
+  }
+
+  .sex-age {
+    margin-top: .222rem;
+    height: .416rem;
+    font-size: .388rem;
+    line-height: .416rem;
+    text-align: center;
+    color: #216654;
+  }
+
+  .update-block {
+    @extend .no-underline;
+    width: 6.111rem;
+    height: 1rem;
+    background-color: #31AE8B;
+    margin: .333rem auto 0px 1.944rem;
+    box-sizing: border-box;
+    padding: .194rem 0px;
+    color: #ffffff;
+    text-align: center;
+    //display: inline-block;
+    @include border-radius(.5rem);
+
+    display: -webkit-box;
+    display: -moz-box;
+    display: box;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+
+    .img-edit {
+      display: block;
+      vertical-align: middle;
+      height: .45rem;
+      width: .45rem;
+      margin-right: .138rem;
+    }
+
+    span {
+      font-size: .388rem;
+      display: block;
+    }
+  }
+}
+
+.doctor-hospital {
+  width: 10rem;
+  height: 1.777rem;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  float: left;
+  display: inline-block;
+  position: relative;
+
+  .border-img {
+    position: absolute;
+    height: 1.222rem;
+    width: 1px;
+    left: 50%;
+    top: .2777rem;
+  }
+
+  .sub {
+    width: 50%;
+    padding: .541rem 0px .541rem 0px;
+    height: 100%;
+    float: left;
+    text-align: center;
+    box-sizing: border-box;
+    line-height: .694rem;
+    font-size: .5rem;
+    color: #216654;
+    display: inline-block;
+
+    &:link { text-decoration: none;}
+    &:active { text-decoration:none}
+    &:hover { text-decoration:none;}
+    &:visited { text-decoration: none;}
+
+    .img-inner {
+      vertical-align: top;
+      width: .694rem;
+      height: .694rem;
+    }
+  }
+}
+
+.menu-ul {
+  width: 10rem;
+  margin-top: .444rem;
+  float: left;
+
+  .menu-item {
+    height: 1.777rem;
+    width: 10rem;
+    padding: .555rem .444rem;
+    //border-bottom: 1px solid #CCCCCC;
+    @include fixedPxLineBottom(#CCCCCC,0.3);
+    box-sizing: border-box;
+    background-color: #ffffff;
+    font-size: .5rem;
+    line-height: 1rem;
+    color: #000000;
+    display: block;
+
+    .logo-img {
+      height: .667rem;
+      width: .67rem;
+      display: inline-block;
+      float: left;
+    }
+
+    .content {
+      display: block;
+      float: left;
+      padding-left: .3rem;
+      height: 100%;
+      line-height: .667rem;
+    }
+    .arrow {
+      display: inline-block;
+      vertical-align: middle;
+      float: right;
+      height: 100%;
+
+      img {
+        height: 100%;
+        display: block;
+      }
+
+      .noRead {
+        //解决垂直居中问题:http://www.cnblogs.com/zjzhome/p/4898898.html
+        font-size: 12px;
+        background-color: red;
+        color: #ffffff;
+        padding: 0px .15rem;
+        margin: .07rem .2rem 0px auto;
+        display: inline-block;
+        //mvertical-align: middle;
+        height: .5rem;
+        line-height: .5rem;
+        @include border-radius(.5rem);
+      }
+    }
+
+    &:first-child {
+      //border-top: 1px solid #CCCCCC;
+      @include fixedPxLineTop(#CCCCCC,0.3);
+    }
+
+    &:hover {
+      color: #000000;
+    }
+
+    &:active {
+      color: #000000;
+    }
+  }
+}

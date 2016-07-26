@@ -1,0 +1,187 @@
+@function tranPTRem($pxT){
+    @return (($pxT/72)*1rem);
+}
+
+@function tranPTRem64($pxT){
+    @return (($pxT/64)*1rem);
+}
+
+.no-warp {
+    white-space: nowrap;
+    overflow: hidden;
+    -webkit-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+
+@mixin fullLineHeight($fontColor,$fontSize,$height) {
+    color: $fontColor;
+    font-size: tranPTRem($fontSize);
+    height:tranPTRem($height);
+    line-height: tranPTRem($height);
+}
+
+@mixin fullLineHeight64($fontColor,$fontSize,$height) {
+    color: $fontColor;
+    font-size: tranPTRem64($fontSize);
+    height:tranPTRem64($height);
+    line-height: tranPTRem64($height);
+}
+
+@mixin displayAsBox(){
+    display: -webkit-box;
+    display: -moz-box;
+    display: box;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+}
+
+@mixin fixedPxLineBottom($borderColor,$rate) {
+    &{
+        position: relative;
+    }
+    &:after {
+        position: absolute;
+        content: '';
+        width: 100%;
+        left: 0;
+        bottom: 0;
+        height: 1px;/*no*/
+        display: block;
+        background-color: $borderColor;
+        -webkit-transform: scale(1,$rate);
+        transform: scale(1,$rate);
+        -webkit-transform-origin: center bottom;
+        transform-origin: center bottom;
+        z-index: 1;
+    }
+}
+
+@mixin fixedPxLineTop($borderColor,$rate,$position:relative) {
+    &{
+        position: $position;
+    }
+    &:before {
+        position: absolute;
+        content: '';
+        width: 100%;
+        left: 0;
+        top: 0;
+        height: 1px;/*no*/
+        display: block;
+        background-color: $borderColor;
+        -webkit-transform: scale(1,$rate);
+        transform: scale(1,$rate);
+        -webkit-transform-origin: center top;
+        transform-origin: center top;
+        z-index: 1;
+    }
+}
+
+@mixin fixedPxLineLeft($borderColor,$rate,$position:relative) {
+    &{
+        position: $position;
+    }
+    &:before {
+        position: absolute;
+        content: '';
+        width: 1px;
+        left: 0;
+        top: 0;
+        height: 200%;/*no*/
+        display: block;
+        background-color: $borderColor;
+        -webkit-transform: scale(1,$rate);
+        transform: scale(1,$rate);
+        -webkit-transform-origin: center top;
+        transform-origin: center top;
+        z-index: 1;
+    }
+}
+
+@mixin fixedBorder($borderColor,$rate,$borderRadius){
+    &{
+        position: relative;
+    }
+    &:before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        bottom: -50%;
+        left: -50%;
+        right: -50%;
+        -webkit-transform: scale($rate);
+        transform: scale($rate);
+        border:1px solid $borderColor;/*no*/
+        -webkit-border-radius: $borderRadius;
+        border-radius: $borderRadius;
+    }
+}
+
+
+.clickStyle {
+    background-color: #cccccc!important;
+}
+
+@mixin border-radius($rateSize) {
+    border-radius: $rateSize;
+    -webkit-border-radius: $rateSize;
+}
+
+.scrollable{
+    overflow: auto;
+}
+
+.body-no-scroll {
+    height: 100vh!important;
+    overflow: hidden;
+}
+
+@mixin noUnderLine() {
+    text-decoration: none;
+
+    &:link {
+        text-decoration: none;
+    }
+    &:visited {
+        text-decoration: none;
+    }
+    &:hover {
+        text-decoration: none;
+    }
+    &:active {
+        text-decoration: none;
+    }
+}
+
+.no-underline {
+    text-decoration: none;
+
+    &:link {
+        text-decoration: none;
+    }
+    &:visited {
+        text-decoration: none;
+    }
+    &:hover {
+        text-decoration: none;
+    }
+    &:active {
+        text-decoration: none;
+    }
+}
+
+html,body {
+    background-color: #ebebeb;
+    font-family: 'Microsoft YaHei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif;
+    -webkit-overflow-scrolling: touch;
+    -webkit-tap-highlight-color:transparent;
+}
+
+.container {
+    width: 10rem;
+    margin: 0 auto;
+    padding: 0px;
+    top: 0;
+    bottom: 0;
+    position: relative;
+}
