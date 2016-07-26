@@ -7,7 +7,7 @@ import * as config from '../common/scripts/config';
  * @param  {[type]} loadManager 加载事件
  * @return {[type]}             [description]
  */
-export function sendHttpRequest(params,loadManager) {
+export function sendHttpRequest(params) {
   params = clearParams(params)
 
   return $.ajax({
@@ -15,12 +15,6 @@ export function sendHttpRequest(params,loadManager) {
     data: params,
     dataType: 'json',
     type: 'post',
-    timeout:config.TIMEOUT,
-    beforeSend:function(){
-      loadManager && loadManager.show();
-    },
-    always:function (parameter) {
-      loadManager && loadManager.hide();
-    }
+    timeout:config.TIMEOUT
   })
 }

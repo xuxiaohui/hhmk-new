@@ -1,0 +1,89 @@
+@import "common.scss";
+
+@mixin shopItemUlList() {
+  width: 10rem;
+  //margin: 0px tranPTRem(16) tranPTRem(20) tranPTRem(16);
+
+  .container-section {
+    width: 49.5%;
+    display: inline-block;
+    vertical-align: text-top;
+
+
+  /*  &:nth-child(2n) {
+      float: right;
+    }*/
+
+    .item-container {
+      width: 100%;
+      display: block;
+      margin-bottom: tranPTRem(10);
+      position: relative;
+      @include fixedBorder(#e6e6e6,0.5,0px);
+
+      &:active {
+        @include fixedBorder(#e6e6e6,0.5,0px);
+      }
+
+      &:link {
+        @include fixedBorder(#e6e6e6,0.5,0px);
+      }
+
+      .top-log {
+        width: 100%;
+        vertical-align: top;
+        height: tranPTRem(356);
+      }
+
+      .desc {
+        background-color: #ffffff;
+        box-sizing: border-box;
+        padding: tranPTRem(20) tranPTRem(25);
+
+        .title {
+          @extend .no-warp;
+          @include fullLineHeight(#333333,28,28);
+        }
+
+        .bottom-text {
+          @include displayAsBox();
+          box-align:end;
+          -webkit-box-align:end;
+
+          .left {
+            flex-grow: 2;
+            @extend .no-warp;
+            display: block;
+            color: #fe714c;
+            font-size: tranPTRem(24);
+            height: tranPTRem(40);
+            margin-top: tranPTRem(25);
+
+            .large {
+              font-size: tranPTRem(32);
+            }
+
+            .old-price {
+              color: #aaaaaa;
+              text-decoration: line-through;
+            }
+          }
+
+          .right {
+            flex-grow: 0;
+            width: tranPTRem(82);
+            height: tranPTRem(40);
+            display: block;
+            border-radius: tranPTRem(5);
+            background-color: #1cc5b7;
+            font-size: tranPTRem(28);
+            line-height: tranPTRem(40);
+            color: #FFFFFF;
+            text-align: center;
+          }
+
+        }
+      }
+    }
+  }
+}

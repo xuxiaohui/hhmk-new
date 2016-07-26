@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" ms-controller="C_Ecshop_index">
+<head>
+  <meta charset="UTF-8">
+  <meta content="telephone=no" name="format-detection"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+  <title>健康商城</title>
+  <script src="../../lib/lib-flexible/flexible_all.js"></script>
+  <link rel="stylesheet" href="/webchatpay/styles/ecshop_index.css">
+</head>
+<body>
+  <div class="container" style="display:none" ms-css-display="finished?'block':'none'">
+   <section class="swiper-container">
+       <div class="swiper-wrapper">
+           <a class="swiper-slide" ms-repeat="advertList" ms-click="toAdUrl(el)">
+             <img class="inner-img" ms-src="el.adPhoto" alt="">
+           </a>
+       </div>
+       <!-- 如果需要分页器 -->
+       <div class="swiper-pagination"></div>
+   </section>
+
+   <section class="category-container"
+            ms-repeat-item="activityPage"
+   >
+     <header class="title-header">
+
+       <div class="title-area">
+         <div class="title" ms-text="item.typeName">热门推荐</div>
+         <a class="more"
+            ms-href="pipeObj.url?('ecshop_list.html?typeId='+item.typeId + '&' + pipeObj.url):('ecshop_list.html?typeId='+item.typeId)"
+            ms-if="item.activityInfoList && item.activityInfoList.length > (typePageSize-1)">
+           <span>查看更多</span>
+           <div class="arrow"></div>
+         </a>
+       </div>
+
+     </header>
+     <!--<div class="not-found" ms-css-display="activityAllLoaded && activityList.size()==0 ? 'block' : 'none'">
+       <div class="not-found-image"></div>
+       目前没有活动哦
+     </div>-->
+     <div class="content-container">
+       <!-- <div class="container-section left"> -->
+       <div class="container-section"
+            ms-repeat="item.activityInfoList"
+            ms-css-float="$index % 2 == 0?'left':'right'"
+            ms-visible="$index < (typePageSize-1)"
+       >
+         <a class="container-section item-container no-underline"
+            ms-href="pipeObj.url? ('ecshop_detail.html?ativityId=' + el.activityId + '&' + pipeObj.url) : ('ecshop_detail.html?ativityId=' + el.activityId)"
+         >
+           <div class="top-log">
+             <img ms-src="el.activityLogo" style="width:100%;height:100%;" alt="" />
+           </div>
+
+           <div class="desc">
+             <h1 class="title" ms-text="el.activityName"></h1>
+             <p class="bottom-text">
+               <span class="left">
+                 <span ms-if="el.salePrice||el.salePrice==0">&yen;</span><span ms-if="el.salePrice||el.salePrice==0" class="large" ms-text="el.salePrice"></span>
+                 <span ms-if="el.orgPrice" class="old-price">&yen;<span ms-if="el.orgPrice" ms-text="el.orgPrice"></span></span>
+               </span>
+               <span class="right" ms-text="el.activityBlock == 3 ? '抢购':'预约'">
+               </span>
+             </p>
+           </div>
+         </a>
+       </div>
+     </div>
+   </section>
+ </div>
+
+  <script src="../../lib/jquery/jquery-2.1.4.min.js"></script>
+  <script>
+    let ua = navigator.userAgent.toLowerCase();
+    if(ua.match(/MicroMessenger/i)=="micromessenger") {
+      $.getScript("../../lib/weixinapi/jweixin-1.0.0.js");
+    }
+  </script>
+  <script src="../../lib/avalon/avalon.min.js"></script>
+  <script src="../../lib/swiper/js/swiper.min.js"></script>
+  <script src="../scripts/ecshop_index.js" charset="utf-8"></script>
+</body>
+</html>

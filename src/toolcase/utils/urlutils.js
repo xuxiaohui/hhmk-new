@@ -36,3 +36,42 @@ export function getParamsArr() {
 export function getHtmlName(){
   return window.location.pathname.split('/').pop().split('.')[0];
 }
+
+/**
+ * 需要套传的渠道参数
+ * @return {[type]} [description]
+ */
+export function getPipeParams(){
+  var pipeParams = ['vHMC','vHMP'];
+  var paramValue = null;
+  var retObj = {};
+  var urlStr = [];
+  pipeParams.forEach(function(item){
+    paramValue = getParamsArr()[item];
+    if (paramValue) {
+      retObj[item] = paramValue;
+      urlStr.push(item + "=" + paramValue);
+    }
+  });
+  return {
+    obj:retObj,
+    url:urlStr.join("&")
+  };
+}
+
+
+/**
+ * 给链接加上渠道参数
+ * @param  {[type]} url    [要处理的url]
+ * @param  {[type]} params [必须是拼接好的,如:abc=123&def=456，与getPipeParams结合起来使用]
+ * @return {[type]}        [description]
+ */
+export function getRetUrl(url,params){
+  if (!$.trim(params)) {
+    return url;
+  }
+  if (url.indexOf('?') >= 0) {
+    return url + "&" + params;
+  }
+  return url + "?" + params;
+}

@@ -43,10 +43,10 @@ export function authenticate (callback) {
           callback(null);
           //$a.saveAccessLogs(null);
         } else {
-          alert("尚未登陆系统");
+          alert("您尚未登陆系统");
         }
       } else {
-        let promise = http.sendHttpRequest({
+        http.sendHttpRequest({
           method:'webchatLoginIn',
           code:code
         }).then(resp => {
