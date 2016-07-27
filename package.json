@@ -33,6 +33,7 @@
     "lodash": "^4.13.1",
     "path": "^0.12.7",
     "run-sequence": "^1.2.2",
+    "weui-sass": "^0.4.3",
     "yargs": "^4.8.0"
   },
   "dependencies": {
