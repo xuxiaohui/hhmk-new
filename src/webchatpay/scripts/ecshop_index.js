@@ -21,6 +21,7 @@ avalon.ready(()=>{
     activityList:[],
     /** 首页活动分类信息 **/
     activityPage:[],
+    typePageSize:5,
     /** 每个分类所取的列表长度 **/
     toAdUrl:function(el) {
       if (el.adUrl) {
@@ -42,7 +43,7 @@ avalon.ready(()=>{
   });
 
   authorservice.authenticate((tokenId) => {
-    webchatActivityInfoPage(tokenId).then(resp => {
+    webchatActivityInfoPage(tokenId,5).then(resp => {
       if (resp.resultCode == 0) {
         vm.activityPage = resp.data.activityType;
         vm.finished = true;

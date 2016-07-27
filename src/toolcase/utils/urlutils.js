@@ -75,3 +75,29 @@ export function getRetUrl(url,params){
   }
   return url + "?" + params;
 }
+
+/**
+ * 将链接的请求参数组合成一个json串
+ * @return {[type]} [description]
+ */
+export function serializeURL() {
+  let pairs = location.search.slice(1).split('&');
+  let result = {};
+  pairs.forEach(function(pair) {
+    pair = pair.split('=');
+    let name = decodeURI(pair[0])
+    let value = decodeURI(pair[1])
+    if(name.length) {
+      if (result[name] !== undefined) {
+        if (!result[name].push) {
+          result[name] = [result[name]];
+        }
+        result[name].push(value || '');
+      } else {
+        result[name] = value || '';
+      }
+    }
+  });
+
+  return JSON.stringify(result);
+}

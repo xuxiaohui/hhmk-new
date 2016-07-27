@@ -93,16 +93,12 @@ gulp.task("copystatic",()=>{
 
 gulp.task("buildImg",()=>{
   return gulp.src([source + '/**/**/*.png',source + '/**/**/*.jpg',source + '/**/**/*.gif',source + '/**/**/*.svg','!'+source+'/lib/**','!'+source+'/toolcase/**'])
-      .pipe(rev())
       .pipe(changed(develop))
       .pipe(gulp.dest(develop))
-      .pipe(rev.manifest())
-      .pipe(gulp.dest(develop+"/rev/img"));
 });
 
 gulp.task("buildCss",()=>{
-  return gulp.src([develop+"/rev/**/*.json",source + "/**/**/*.{scss,css}",'!'+source+'/lib/**','!'+source+'/toolcase/**'])
-              .pipe(revCollector())
+  return gulp.src([source + "/**/**/*.{scss,css}",'!'+source+'/lib/**','!'+source+'/toolcase/**'])
               .pipe(changed(develop))
               /*.pipe(rename({suffix: '.min'}))*/
               .pipe(sass().on('error', sass.logError))
@@ -111,11 +107,8 @@ gulp.task("buildCss",()=>{
                 cascade: false,
                 remove:false
               }))
-              .pipe(rev())
               .pipe(cssmin())
               .pipe(gulp.dest(develop))
-              .pipe(rev.manifest())
-              .pipe(gulp.dest(develop+"/rev/css"))
               .pipe(connect.reload());
 });
 
@@ -132,7 +125,6 @@ gulp.task("buildJs",()=>{
                   })
                 ]
             }))
-            .pipe(rev())
             .pipe(uglify({
               mangle:false,
               //preserveComments: 'all',
@@ -154,8 +146,6 @@ gulp.task("buildJs",()=>{
               banner:"/* eew */"
             }))
             .pipe(gulp.dest(develop))
-            .pipe(rev.manifest())
-            .pipe(gulp.dest(develop+"/rev/js"))
             .pipe(connect.reload());
 })
 
@@ -172,12 +162,10 @@ gulp.task("buildHtml",()=>{
         removeTagWhitespace:true,
         removeRedundantAttributes:true,
     };
-    return gulp.src([develop+"/rev/**/*.json",
-            source + '/**/**/*.html',
+    return gulp.src([source + '/**/**/*.html',
             '!'+source+'/lib/**',
             '!'+source+'/toolcase/**'])
           .pipe(changed(develop))
-          .pipe(revCollector())
           /*.pipe(htmlmin(options))*/
           .pipe(gulp.dest(develop))
           .pipe(connect.reload());

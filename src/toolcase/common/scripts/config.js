@@ -1,4 +1,5 @@
 export const BASEURL = 'http://server.baymy.cn/Rest';
+export const LOGSERVERURL = 'http://log.baymy.cn';
 export const WEXINUIR = 'http://webchat.baymy.cn';
 export const IMGBASEURL = 'http://7xl8mj.com2.z0.glb.qiniucdn.com/';
 export const QINIUUPLOADURL = 'http://upload.qiniu.com/';
