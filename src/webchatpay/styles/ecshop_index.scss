@@ -7,7 +7,7 @@ html, body {
     max-width: 640px;
     margin: 0 auto;
     background: #FFFFFF;
-}
+  }
 
 .swiper-pagination {
     transition: 0s;
@@ -51,7 +51,7 @@ html, body {
 
 .banner-bg {
     margin-bottom: tranPTRem(20);
-    background-image: url("../images/bannerbg.png");
+    background-image: url("/webchatpay/images/bannerbg.png");
     background-size: 100% auto;
     background-position: top center;
     @include displayAsBox();
@@ -106,7 +106,7 @@ html, body {
 		    .arrow {
 			  height: tranPTRem(24);
 			  width: tranPTRem(28);
-			  background-image: url("../images/arrow.svg");
+			  background-image: url("/webchatpay/images/arrow.svg");
 			  background-size: auto 100%;
 			  background-repeat: no-repeat;
 			  display: block;
@@ -141,7 +141,7 @@ html, body {
 	  width: tranPTRem(202);
 	  height: tranPTRem(256);
 	  margin: 0 auto tranPTRem(20) auto;
-	  background-image: url("../images/not-found.png");
+	  background-image: url("/webchatpay/images/not-found.png");
 	  background-size: 100% 100%;
     }
 }

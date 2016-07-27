@@ -14,12 +14,17 @@ const flatten     = require('gulp-flatten');
 const cssmin      = require('gulp-minify-css');
 const rev         = require('gulp-rev');
 const rename      = require('gulp-rename');
+const clean       = require('gulp-clean');
+const plumber     = require('gulp-plumber');
+const changed     = require('gulp-changed');
+
 // var rollup      = require('rollup').rollup;
 // var commonjs    = require('rollup-plugin-commonjs');
 // var nodeResolve = require('rollup-plugin-node-resolve');
 
 var source = 'src';
 var develop = 'dev';
+var dest = 'dest';
 
 gulp.task('default', () => {
     gulp.src('src/main.js')
@@ -71,78 +76,90 @@ gulp.task('default', () => {
       .pipe(gulp.dest('dist'));
 });
 
+gulp.task('cleanAll',()=>{
+  return gulp.src(['!'+develop+'/lib/**'])
+        .pipe(plumber())
+        .pipe(clean());
+});
+
 /**
  * copy 静态资源到对应的目录
  */
 gulp.task("copystatic",()=>{
-  gulp.src(source + "/lib/**/**.*")
+  return gulp.src(source + "/lib/**")
+    .pipe(changed(develop))
     .pipe(gulp.dest(develop + "/lib"))
 });
 
-gulp.task("buildCenterImg",()=>{
-  gulp.src([source + '/center/**/*.png',source + '/center/**/*.jpg',source + '/center/**/*.gif',source + '/center/**/*.svg'])
+gulp.task("buildImg",()=>{
+  return gulp.src([source + '/**/**/*.png',source + '/**/**/*.jpg',source + '/**/**/*.gif',source + '/**/**/*.svg','!'+source+'/lib/**','!'+source+'/toolcase/**'])
       .pipe(rev())
-      .pipe(gulp.dest(develop+'/center'))
+      .pipe(changed(develop))
+      .pipe(gulp.dest(develop))
       .pipe(rev.manifest())
       .pipe(gulp.dest(develop+"/rev/img"));
 });
 
-gulp.task("buildCenterCss",()=>{
-  gulp.src([develop+"/rev/**/*.json",source + "/**/**/*.{scss,css}"])
-  .pipe(revCollector())
-  /*.pipe(rename({suffix: '.min'}))*/
-  .pipe(sass().on('error', sass.logError))
-  .pipe(autoprefixer({
-    browsers: ['last 2 versions', 'Android >= 4.0'],
-    cascade: false,
-    remove:false
-  }))
-  .pipe(rev())
-  .pipe(cssmin())
-  .pipe(gulp.dest(develop))
-  .pipe(rev.manifest())
-  .pipe(gulp.dest(develop+"/rev/css"))
+gulp.task("buildCss",()=>{
+  return gulp.src([develop+"/rev/**/*.json",source + "/**/**/*.{scss,css}",'!'+source+'/lib/**','!'+source+'/toolcase/**'])
+              .pipe(revCollector())
+              .pipe(changed(develop))
+              /*.pipe(rename({suffix: '.min'}))*/
+              .pipe(sass().on('error', sass.logError))
+              .pipe(autoprefixer({
+                browsers: ['last 2 versions', 'Android >= 4.0'],
+                cascade: false,
+                remove:false
+              }))
+              .pipe(rev())
+              .pipe(cssmin())
+              .pipe(gulp.dest(develop))
+              .pipe(rev.manifest())
+              .pipe(gulp.dest(develop+"/rev/css"))
+              .pipe(connect.reload());
 });
 
-gulp.task("buildCenterJs",()=>{
-  gulp.src(source + "/center/**/*.js")
-    .pipe(rollup({
-        // any option supported by rollup can be set here, including sourceMap
-        // sourceMap: true
-        format: 'iife',
-        plugins:[
-          babel({
-              exclude: 'node_modules/**/*',
-          })
-        ]
-    }))
-    .pipe(rev())
-    .pipe(uglify({
-      mangle:false,
-      //preserveComments: 'all',
-      compress:{
-          sequences     : false,  // join consecutive statemets with the “comma operator”
-          properties    : false,  // optimize property access: a["foo"] → a.foo
-          comparisons   : true,  // optimize comparisons
-          unused        : true,  // drop unused variables/functions
-          if_return     : true,  // optimize if-s followed by return/continue
-          join_vars     : true,  // join var declarations
-          cascade       : true,  // try to cascade `right` into `left` in sequences
-          side_effects  : true,  // drop side-effect-free statements
-          warnings      : true,  // warn about potentially dangerous optimizations/code
-          // global_defs   : {}     // global definitions
-      },
-      output: {
-          beautify: false
-      },
-      banner:"/* eew */"
-    }))
-    .pipe(gulp.dest(develop+'/center'))
-    .pipe(rev.manifest())
-    .pipe(gulp.dest(develop+"/rev/js"));
+gulp.task("buildJs",()=>{
+  return gulp.src([source + "/**/**/*.js",'!'+source+'/lib/**','!'+source+'/toolcase/**'])
+            .pipe(changed(develop))
+            .pipe(rollup({
+                // any option supported by rollup can be set here, including sourceMap
+                // sourceMap: true
+                format: 'iife',
+                plugins:[
+                  babel({
+                      exclude: 'node_modules/**/*',
+                  })
+                ]
+            }))
+            .pipe(rev())
+            .pipe(uglify({
+              mangle:false,
+              //preserveComments: 'all',
+              compress:{
+                  sequences     : false,  // join consecutive statemets with the “comma operator”
+                  properties    : false,  // optimize property access: a["foo"] → a.foo
+                  comparisons   : true,  // optimize comparisons
+                  unused        : true,  // drop unused variables/functions
+                  if_return     : true,  // optimize if-s followed by return/continue
+                  join_vars     : true,  // join var declarations
+                  cascade       : true,  // try to cascade `right` into `left` in sequences
+                  side_effects  : true,  // drop side-effect-free statements
+                  warnings      : true,  // warn about potentially dangerous optimizations/code
+                  // global_defs   : {}     // global definitions
+              },
+              output: {
+                  beautify: false
+              },
+              banner:"/* eew */"
+            }))
+            .pipe(gulp.dest(develop))
+            .pipe(rev.manifest())
+            .pipe(gulp.dest(develop+"/rev/js"))
+            .pipe(connect.reload());
 })
 
-gulp.task("buildCenterHtml",()=>{
+gulp.task("buildHtml",()=>{
   var options = {
         removeComments: true,//清除HTML注释
         collapseWhitespace: true,//压缩HTML
@@ -155,16 +172,131 @@ gulp.task("buildCenterHtml",()=>{
         removeTagWhitespace:true,
         removeRedundantAttributes:true,
     };
-    gulp.src([develop+"/rev/**/*.json",source + '/center/**/*.html'])
-        .pipe(revCollector())
-        /*.pipe(htmlmin(options))*/
-        .pipe(gulp.dest(develop+"/center"));
-})
+    return gulp.src([develop+"/rev/**/*.json",
+            source + '/**/**/*.html',
+            '!'+source+'/lib/**',
+            '!'+source+'/toolcase/**'])
+          .pipe(changed(develop))
+          .pipe(revCollector())
+          /*.pipe(htmlmin(options))*/
+          .pipe(gulp.dest(develop))
+          .pipe(connect.reload());
+});
+
+gulp.task('dev',gulp.series('copystatic','buildImg','buildCss','buildJs','buildHtml'));
 
 gulp.task('webserver', function() {
     connect.server({
         root: './dev/',
-        livereload: true,
-        port: 8888
+        livereload: true
     });
 });
+
+gulp.task('watch', function() {
+    gulp.watch(source + "/**/**/*.{scss,css}", gulp.series('buildCss'));
+    gulp.watch(source + "/**/**/*.js", gulp.series('buildJs'));
+    gulp.watch(source + "/**/**/*.html", gulp.series('buildHtml'));
+});
+
+gulp.task('startserver', gulp.series(gulp.parallel('webserver','watch')));
+
+gulp.task('cleanproAll',()=>{
+  return gulp.src(dest)
+        .pipe(plumber())
+        .pipe(clean());
+});
+
+/**
+ * copy 静态资源到对应的目录
+ */
+gulp.task("copyprostatic",()=>{
+  return gulp.src(source + "/lib/**")
+    .pipe(gulp.dest(dest + "/lib"))
+});
+
+gulp.task("buildproImg",()=>{
+  return gulp.src([source + '/**/**/*.png',source + '/**/**/*.jpg',source + '/**/**/*.gif',source + '/**/**/*.svg','!'+source+'/lib/**','!'+source+'/toolcase/**'])
+      .pipe(rev())
+      .pipe(gulp.dest(dest))
+      .pipe(rev.manifest())
+      .pipe(gulp.dest(dest+"/rev/img"));
+});
+
+gulp.task("buildproCss",()=>{
+  return gulp.src([dest+"/rev/**/*.json",source + "/**/**/*.{scss,css}",'!'+source+'/lib/**','!'+source+'/toolcase/**'])
+              .pipe(revCollector())
+              /*.pipe(rename({suffix: '.min'}))*/
+              .pipe(sass().on('error', sass.logError))
+              .pipe(autoprefixer({
+                browsers: ['last 2 versions', 'Android >= 4.0'],
+                cascade: false,
+                remove:false
+              }))
+              .pipe(rev())
+              .pipe(cssmin())
+              .pipe(gulp.dest(dest))
+              .pipe(rev.manifest())
+              .pipe(gulp.dest(dest+"/rev/css"))
+});
+
+gulp.task("buildproJs",()=>{
+  return gulp.src([source + "/**/**/*.js",'!'+source+'/lib/**','!'+source+'/toolcase/**'])
+            .pipe(rollup({
+                // any option supported by rollup can be set here, including sourceMap
+                // sourceMap: true
+                format: 'iife',
+                plugins:[
+                  babel({
+                      exclude: 'node_modules/**/*',
+                  })
+                ]
+            }))
+            .pipe(rev())
+            .pipe(uglify({
+              mangle:false,
+              //preserveComments: 'all',
+              compress:{
+                  sequences     : false,  // join consecutive statemets with the “comma operator”
+                  properties    : false,  // optimize property access: a["foo"] → a.foo
+                  comparisons   : true,  // optimize comparisons
+                  unused        : true,  // drop unused variables/functions
+                  if_return     : true,  // optimize if-s followed by return/continue
+                  join_vars     : true,  // join var declarations
+                  cascade       : true,  // try to cascade `right` into `left` in sequences
+                  side_effects  : true,  // drop side-effect-free statements
+                  warnings      : true,  // warn about potentially dangerous optimizations/code
+                  // global_defs   : {}     // global definitions
+              },
+              output: {
+                  beautify: false
+              },
+              banner:"/* eew */"
+            }))
+            .pipe(gulp.dest(dest))
+            .pipe(rev.manifest())
+            .pipe(gulp.dest(dest+"/rev/js"));
+})
+
+gulp.task("buildproHtml",()=>{
+  var options = {
+        removeComments: true,//清除HTML注释
+        collapseWhitespace: true,//压缩HTML
+        removeEmptyAttributes: true,//删除所有空格作属性值 <input id="" /> ==> <input />
+        removeScriptTypeAttributes: true,//删除<script>的type="text/javascript"
+        removeStyleLinkTypeAttributes: true,//删除<style>和<link>的type="text/css"
+        minifyJS: true,//压缩页面JS
+        minifyCSS: true,//压缩页面CSS
+        collapseBooleanAttributes:true,
+        removeTagWhitespace:true,
+        removeRedundantAttributes:true,
+    };
+    return gulp.src([dest+"/rev/**/*.json",
+            source + '/**/**/*.html',
+            '!'+source+'/lib/**',
+            '!'+source+'/toolcase/**'])
+          .pipe(revCollector())
+          .pipe(htmlmin(options))
+          .pipe(gulp.dest(dest));
+});
+
+gulp.task('pro',gulp.series('cleanproAll','copyprostatic','buildproImg','buildproCss','buildproJs','buildproHtml'));
