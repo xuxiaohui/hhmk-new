@@ -1,4 +1,4 @@
-/** 商城信息处理累 **/
+/** 商城信息服务 **/
 import * as http from '../utils/httputils';
 
 /**
@@ -10,5 +10,19 @@ export function webchatActivityInfoPage(tokenId,getNum=5) {
     method:'webchatActivityInfoPage',
     tokenId:tokenId,
     getNum:getNum
+  });
+}
+
+/**
+ * 获得活动的详细信息
+ * @param  {[type]} tokenId    [用户凭证]
+ * @param  {[type]} activityId [活动的id]
+ * @return {[type]}            [description]
+ */
+export function webchatActivityInfo(tokenId,activityId) {
+  return http.sendHttpRequest({
+    method:'webchatActivityInfo',
+    tokenId:tokenId,
+    activityId:activityId
   });
 }

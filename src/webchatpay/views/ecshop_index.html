@@ -26,7 +26,7 @@
      <header class="title-header">
 
        <div class="title-area">
-         <div class="title" ms-text="item.typeName"></div>
+         <div class="title" ms-text="item.typeName" ms-click="showAlert()"></div>
          <a class="more"
             ms-attr-href="pipeObj.url?('ecshop_list.html?typeId='+item.typeId + '&' + pipeObj.url):('ecshop_list.html?typeId='+item.typeId)"
             ms-if="item.activityInfoList && item.activityInfoList.length > (typePageSize-1)">
@@ -80,6 +80,7 @@
   </script>
   <script src="../../lib/avalon/avalon.min.js"></script>
   <script src="../../lib/swiper/js/swiper.min.js"></script>
-  <script src="/webchatpay/scripts/ecshop_index.js" charset="utf-8"></script>
+  <!--<script src="/webchatpay/scripts/ecshop_index.js" charset="utf-8"></script>-->
+  <script src="../scripts/ecshop_index_crtl.js"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-import {getParamObj,getHtmlName} from '../utils/urlutils';
+import {getParamValue,getHtmlName} from '../utils/urlutils';
 import * as storageutil from '../utils/storageutil';
 import {isWeiXinBrowser} from '../utils/bowerutil';
 import * as http from '../utils/httputils'
@@ -13,17 +13,29 @@ let anonymousAuthority = [
 ]
 
 /**
+ * 向微信发起鉴权请求
+ * @return {[type]} [description]
+ */
+export function authenticateFromWeixin(){
+  let code = getParamValue('code');
+  return http.sendHttpRequest({
+    method:'webchatLoginIn',
+    code:code
+  });
+}
+
+/**
 * 用户鉴权
 * @param callback 登录后的回调函数
 * @param anonymousAuthority 拥有匿名权限的模块进行免登录处理
 */
 export function authenticate (callback) {
 
-  let code = getParamObj('code');
+  let code = getParamValue('code');
 
   var tokenId = storageutil.getTokenId();
 
-  var urlTokenId = getParamObj('tokenId');
+  var urlTokenId = getParamValue('tokenId');
 
   var htmlName = getHtmlName();
 
@@ -87,7 +99,7 @@ export function authenticate (callback) {
       //$a.saveAccessLogs(tokenId);
       //$a.tokenId = tokenId;
       try {
-        AccesslogService.getInstance().saveAccessLogs(rtid);
+        AccesslogService.getInstance().saveAccessLogs(tokenId);
       } finally {
         callback(tokenId);
       }

@@ -4,7 +4,7 @@
  * @param  {[type]} str [参数的key值]
  * @return {[type]}     [description]
  */
-export function getParamObj(keystr){
+export function getParamValue(keystr){
     let param = window.location.search.replace('?', '').split('&');
     for(let i=0,length=param.length;i<length;i++){
         let str = param[i].split('=');

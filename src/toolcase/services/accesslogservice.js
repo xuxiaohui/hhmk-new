@@ -47,4 +47,9 @@ export default class AccesslogService {
 				}
 			});
   }
+
+  /** 获得访问的参数 **/
+  getParams(){
+
+  }
 }

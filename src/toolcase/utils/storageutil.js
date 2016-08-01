@@ -15,10 +15,14 @@ export function getTokenId(){
           if (isTokenLegal(tokenIdObj.tokenId)) {
             return tokenIdObj.tokenId;
           } else {
+            /** 如果有tokenId但是值不合法，那么需要把不合法的tokenId从缓存中清除掉 **/
+            clearTokenId();
             return null;
           }
         }
       }
+    } else {
+      return null;
     }
   } catch(e) {
     console.log(e);
@@ -26,6 +30,7 @@ export function getTokenId(){
   if (isTokenLegal(tokenId)) {
     return tokenId;
   } else {
+    clearTokenId();
     return null;
   }
 }
@@ -58,4 +63,9 @@ export function isTokenLegal(tokenId) {
     return false;
   }
   return true;
+}
+
+export function clearTokenId() {
+  SESSIONSTORAGE.removeItem("tokenId");
+  LOCALSTORAGE.removeItem("tokenId");
 }

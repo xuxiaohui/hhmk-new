@@ -1,5 +1,7 @@
 @import "../../toolcase/common/styles/common.scss";
 @import "../../../node_modules/weui-sass/src/style/widget/weui_tips/weui_toast.scss";
+@import "../../../node_modules/weui-sass/src/style/widget/weui_tips/weui_mask.scss";
+@import "../../../node_modules/weui-sass/src/style/widget/weui_tips/weui_dialog.scss";
 @import "../../lib/swiper/css/swiper.min.css";
 @import "../../toolcase/common/styles/common_list.scss";
 
@@ -8,8 +10,6 @@ html, body {
     margin: 0 auto;
     background: #FFFFFF;
   }
-
-  
 
 .swiper-pagination {
     transition: 0s;

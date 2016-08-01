@@ -1,4 +1,4 @@
-import * as authorservice from '../../toolcase/services/authorservice';
+import * as authenservice from '../../toolcase/services/authenservice';
 import {commonNoticeList} from '../../toolcase/services/noticeservice';
 import ToastService from '../../toolcase/components/toast/toastservice'
 
@@ -11,7 +11,7 @@ avalon.ready(()=>{
         location.href = url;
       }
    });
-   authorservice.authenticate((tokenId) => {
+   authenservice.authenticate((tokenId) => {
      commonNoticeList(tokenId).then(resp => {
        if (resp.resultCode == 0) {
          avalonVm.data = resp.data.notice;

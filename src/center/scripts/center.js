@@ -1,4 +1,4 @@
-import * as authorservice from '../../toolcase/services/authorservice';
+import * as authenservice from '../../toolcase/services/authenservice';
 import {webchatGetUserInfo} from '../../toolcase/services/userservice';
 import ToastService from '../../toolcase/components/toast/toastservice'
 
@@ -12,7 +12,7 @@ avalon.ready(()=>{
      data: {},
      allLabels: []
    });
-   authorservice.authenticate((tokenId) => {
+   authenservice.authenticate((tokenId) => {
      webchatGetUserInfo(tokenId).then(resp => {
        if (resp.resultCode == 0) {
          avalonVm.data = resp.data;

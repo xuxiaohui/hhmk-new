@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="telephone=no" name="format-detection"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+    <title></title>
+    <script src="../../lib/lib-flexible/flexible_all.js"></script>
+    <link rel="stylesheet" href="/webchatpay/styles/ecshop_detail.css">
+</head>
+<body ms-controller="C_Ecshop_detail">
+  <div id="declare-panel" class="declare-panel" ms-if="activityInfo.reminid.reminidContent">
+      <div class="content-block">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAYAAAA6RwvCAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2RpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NTc3MiwgMjAxNC8wMS8xMy0xOTo0NDowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpENDI4MENGQjZEOTlFNTExODI3MEMzNkQ4Nzk1QUQ1QiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDoyRDAwNjkxQ0VEOTExMUU1OTJCMUJBNjEzODYwODc4QiIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDoyRDAwNjkxQkVEOTExMUU1OTJCMUJBNjEzODYwODc4QiIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IFdpbmRvd3MiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDoxN0IyMjU0MDYzRjJFNTExOTJGMEE3RjEzMTY2RkRBNiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpENDI4MENGQjZEOTlFNTExODI3MEMzNkQ4Nzk1QUQ1QiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PlOvI8AAAAJASURBVHjazJjPSwJBFMfXdRVF1H6YSFBhCZ36Rb/uQUFQ1Kl/skvgIapDh64dsigiijCtiH5IFpRl0XfgrYzLzuzuuIYDn5O7Ox/fvPdmdjWtQ0bA4/UhMAj6QS+IgzD99gXewDO4Azfg22+RBJgEOWC4vKcOLsERqLYqEgTTYBzoilH/BSfgEPyoiLAoLNIS+DHYku2JoiMSSYFlEPU5Jz/ANnhyI8IisQ4ibSqQT7BljYxVhCXimo/LIRovJFPnk5EfsyD7D20jSsl/ayfClmRBkjdl6hmGhyW4B0nB72kq75pVZB70CW4qgR1qUsMuZJhEHpzSM5OCQmHPKWpcbwhRs9IkVZSktc3TRE4SFbonJbk2R3M3IpJ1EAlRJEo0AYvMiE1keIlusOLQAnT6cxVTZMzB3I2MVwmN26OKpsgUiLnc9Oxk6ooS5hZwborMeagGO5kLRQkzPQpmsoYV+sAqTVxpQaIxt+5zowqo3qhzCeN1v+BzwoyMU2mLkrWpfGOKEmyJRilXZKUt23cayZp2Ub4iiQhNOqIoU+LL16BKUJHgd24VmQLf0N6pqemKEqoyrP8csF4S5JpKXLI87FR+BrokEnYyryAj2YFZ/7m2lhs7BmxIolIm0YiHpH4EA5KOukmyTceAGnXNjOQwbXgoS0MSCTaOwZXohPYAhtpwaLYr2X2KSmcfnjvqdYKPzBLo8XE5dr2+YPE5NOPQY9r+yskPlv0Tii/hBbNE2/lZImH5LFFV/SzRMeNPgAEAzOKhuKU2jfYAAAAASUVORK5CYII="
+               alt=""
+               class="close-log"
+               ms-on-click="closeDeclare()"
+          >
+          <div class="content" ms-html="activityInfo.reminid.reminidContent"></div>
+          <div class="button-container">
+              <a class="enter-button"
+                 ms-click="toCountDownUrl()"
+                 ms-class="active:countdown==0"
+                 ms-text="countdown>0?'我知道了' + countdown + 's':'我知道了'"></a>
+          </div>
+      </div>
+  </div>
+      <div id="wrapper" class="wrapper">
+          <!-- 图片滚动栏 -->
+          <section class="swiper-container">
+              <div class="swiper-wrapper">
+                  <div class="swiper-slide" ms-repeat="activityInfo.picture">
+                      <img class="inner-img" ms-attr-src="el.pictureUrl" alt="">
+                  </div>
+              </div>
+              <!-- 如果需要分页器 -->
+
+              <div class="title-bar">
+                  <div class="bottom-bar">
+                      <span class="left no-warp" ms-text="''"></span>
+                      <span class="right"><span id="currentIndex">1</span>/<span
+                              ms-text="activityInfo.picture.size()"></span></span>
+                  </div>
+              </div>
+          </section>
+
+          <div class="all-message-container">
+              <section class="single-row-bar price-row-bar no-border-bottom">
+                  <div class="left">
+                      <div class="content title" ms-text="activityInfo.activityName">
+                      </div>
+                  </div>
+              </section>
+              <!-- 价格区域 -->
+              <section class="single-row-bar no-border-bottom">
+                  <div class="left no-warp">
+                      <div class="content no-warp">
+                          <p class="new-price active-font-color">
+                              <span class="small">&yen;</span>
+                              <span class="large" ms-text="activityInfo.salePriceMin"></span>
+                <span ms-if="activityInfo.isGet"
+                      class="bespoke"
+                      ms-css-display="activityInfo.isGet ? 'inline-block' : 'none'"
+                      style="display:none"
+                >可到院支付</span>
+
+                          </p>
+                          &nbsp;
+                          <p class="old-price" ms-if="activityInfo.orgPrice">
+                              价格 &yen;<span class="price-num" ms-text="activityInfo.orgPrice"></span>
+                <span ms-if="activityInfo.activityBlock == 3"
+                      class="bespoke bestpoke-freepost"
+                      style="display:none"
+                >包邮</span>
+                          </p>
+                      </div>
+                  </div>
+                  <div class="right" ms-if="activityInfo.saleNum && activityInfo.saleNum>0">
+                      <span class="sales" ms-text="'销量:'+activityInfo.saleNum"></span>
+                  </div>
+              </section>
+
+              <section class="muti-row-bar top-border date-hospital"
+                       ms-if="activityInfo.activityStartTime||activityInfo.activityAddress">
+                  <div class="item-container" ms-if="activityInfo.activityStartTime">
+                      <div class="left">
+                          时间
+                      </div>
+                      <div class="right">
+                          <span ms-text="activityInfo.activityStartTime"></span>－<span
+                              ms-text="activityInfo.activityEndTime"></span>
+                      </div>
+                  </div>
+                  <div class="item-container" ms-if="activityInfo.activityAddress">
+                      <div class="left">
+                          地点
+                      </div>
+                      <div class="right" ms-text="activityInfo.activityAddress">
+                      </div>
+                  </div>
+              </section>
+              <!-- 声明模块 -->
+              <section class="single-row-bar declare-container coupon-container" ms-if="activityInfo.couponsPrice">
+                  <div class="container">
+                      <div class="left no-warp">
+                          <span class="bespoke">券</span>
+                          <div class="item">有可用优惠券，可再减 <span class="price" ms-text="activityInfo.couponsPrice"></span> 元
+                          </div>
+                      </div>
+                  </div>
+              </section>
+
+              <div id="stickyPart" class="detail-title-banner sticky-part">
+                  <div class="tab-menu"
+                       ms-class="active:tabIndex==1"
+                       ms-click="toggleTab(1)"
+                  >
+                  <span class="font-container">
+                      产品详情
+                  </span>
+                  </div>
+                  <div class="tab-menu"
+                       ms-class="active:tabIndex==2"
+                       ms-click="toggleTab(2)"
+                  >
+                      <span class="font-container" ms-text="activityInfo.assessNum ? '用户评价('+activityInfo.assessNum+')':'用户评价(0)'"></span>
+                  </div>
+              </div>
+              <section id="detail-container" class="detail-container">
+                  <div class="detail-content" ms-html="activityInfo.activityIntro"></div>
+              </section>
+              <section id="comment-container" class="detail-container comment-container" style="display: none">
+                  <div class="not-found"
+                       ms-if="!activityInfo.assessNum"
+                       ms-css-display = "!activityInfo.assessNum ? 'block':'none'"
+                  >
+                      <div class="not-found-image"></div>
+                      暂且没有小主来评论哦~
+                  </div>
+
+                  <ul class="comment-ul"
+                      ms-if="activityInfo.assessNum>0"
+                      style="display: none"
+                      ms-css-display="activityInfo.assessNum>0?'block':'none'"
+                  >
+                      <li ms-repeat="assessList" class="comment-li">
+                          <div class="base-message">
+                              <div class="icon-left">
+                                  <img ms-attr-src="el.userPhoto ? el.userPhoto:'../images/default-user.png'" alt="" class="img">
+                              </div>
+                              <div class="content-right">
+                                  <h3 class="name no-warp" ms-text="el.userName"></h3>
+                                  <div class="star">
+                                  <span>
+                                      <ul class="stars">
+                                          <li ms-repeat-item="[1,2,3,4,5]" ms-class="light-stars: (item-1) < el.assessValue">
+                                              <i class="fa fa-star"></i>
+                                          </li>
+                                      </ul>
+                                  </span>
+                                      <span ms-text="el.createTime ? el.createTime:''"></span>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="comment-message" ms-html="el.assessContent?el.assessContent:'好评'">
+                          </div>
+                          <div class="comment-image-bar"
+                               style="display: none;"
+                               ms-css-display="el.encgroup && el.encgroup.length>0?'block':'none'"
+                               ms-if="el.encgroup && el.encgroup.length>0">
+                              <div class="h-scroller-container">
+                                  <div class="menu-ul">
+                                      <img ms-repeat-item="el.encgroup"
+                                           ms-attr-src="item.encUrlSmall? item.encUrlSmall:'../../assets/images/default-doctoer.png'"
+                                           alt=""
+                                           ms-click="showImg($event,$index,el)"
+                                           class="img-item">
+                                  </div>
+                              </div>
+                          </div>
+                      </li>
+                  </ul>
+                  <div id="finished" class="pull-up-finished" ms-if="assessList.length > 0">
+                      <span class="loading-block" ms-if="!assessAllLoad"></span>
+                      <span ms-text="assessAllLoad?'暂无更多评论':''"></span>
+                  </div>
+              </section>
+
+          </div>
+  </div>
+  <div class="fixed-pay-button">
+      <div class="left-price">
+          <span>价格:</span>
+          <span class="price-cls" ms-text="activityInfo.salePriceMin || activityInfo.salePriceMin==0 ? '&yen;'+activityInfo.salePriceMin:''"></span>
+      </div>
+      <a class="contact-block no-underline"
+         title="4009020365" alt="4009020365"
+         ms-attr-href="(activityInfo.contactsInfo && activityInfo.contactsInfo.contactsTel)?'tel:'+activityInfo.contactsInfo.contactsTel:'tel:4009020365'"
+      >
+          <div>
+              <img src="../images/callus.png" alt="">
+              <span>客服</span>
+          </div>
+      </a>
+      <div class="button-block"
+           ms-class-gray-button="(!activityInfo.ticketId || activityInfo.ticketId.size < 1)"
+           href="javascript:void(0)"
+           ms-click="toNextHref()"
+           ms-text="activityInfo.activityBlock == 1 ? '我要预约':'立即抢购'"
+      ></div>
+  </div>
+<script src="../../lib/jquery/jquery-2.1.4.min.js"></script>
+<script>
+  let ua = navigator.userAgent.toLowerCase();
+  if(ua.match(/MicroMessenger/i)=="micromessenger") {
+    $.getScript("../../lib/weixinapi/jweixin-1.0.0.js");
+  }
+</script>
+<script src="../../lib/avalon/avalon.min.js"></script>
+<script src="../../lib/swiper/js/swiper.min.js"></script>
+<script src="../../lib/iscroll/build/iscroll-probe.js"></script>
+<script src="/webchatpay/scripts/ecshop_detail_crtl.js"></script>
+</body>
+</html>

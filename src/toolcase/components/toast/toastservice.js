@@ -1,5 +1,7 @@
 /**
  * 在使用本服务之前需要在对应页面的sass页面里面引入对应的样式
+ * 需要在scss中引入微信的toast相关的样式文件：
+ * @import "../../../node_modules/weui-sass/src/style/widget/weui_tips/weui_toast.scss";
  */
 export default class ToastService {
 
