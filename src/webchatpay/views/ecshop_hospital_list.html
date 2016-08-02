@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta content="telephone=no" name="format-detection"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+  <title>选择体检医院</title>
+  <script src="../../lib/lib-flexible/flexible_all.js"></script>
+  <link rel="stylesheet" href="/webchatpay/styles/ecshop_hospital_list.css">
+</head>
+<body ms-controller="C_Ecshop_ticket">
+  <div class="container">
+    <ul class="hospital-list">
+      <li ms-repeat="ticketList">
+        <div class="hospital-item no-underline"
+            ms-if="el.remain<=0"
+            style="display: none"
+             ms-css-display="el.remain<=0?'-webkit-box':'none'"
+        >
+            <div class="left">
+              <h1 class="hospital-name">
+                <div class="left no-warp" style="color:#999999" ms-text="el.ticketName"></div>
+                <div class="name-right">
+                  &yen;<span class="price-num" ms-text="el.salePrice"></span>
+                </div>
+              </h1>
+              <div class="hospital-desc">
+                <span style="color:#999999" ms-text="el.ticketAddress"></span>
+              </div>
+
+              <div class="hospital-desc" ms-css-display="el.priceType==2||el.priceType==3?'inline-block':'none'">
+                <span class="bespoke"
+                      style="display:none;"
+                      ms-css-display="el.priceType==2||el.priceType==3?'inline-block':'none'"
+                >可到院支付</span>
+              </div>
+            </div>
+        </div>
+
+        <a ms-if="el.remain>0"
+          class="hospital-item no-underline"
+           ms-css-display="el.remain>0?'-webkit-box':'none'"
+           style="display: none"
+          ms-attr-href="pipeObj.url?('ecshop_form.html?ticketId='+el.ticketId + '&' + pipeObj.url):('ecshop_form.html?ticketId='+el.ticketId)">
+            <div class="left">
+              <h1 class="hospital-name">
+                <div class="left no-warp" ms-text="el.ticketName"></div>
+                <div class="name-right">
+                  &yen;<span class="price-num" ms-text="el.salePrice"></span>
+                </div>
+              </h1>
+
+              <div class="hospital-desc">
+                <span style="color:#999999" class="address" ms-text="el.ticketAddress"></span>
+              </div>
+
+              <div class="hospital-desc" ms-css-display="el.priceType==2||el.priceType==3?'block':'none'">
+                <span class="bespoke"
+                      style="display:none;"
+                      ms-css-display="el.priceType==2||el.priceType==3?'inline-block':'none'"
+                >可到院支付</span>
+                <!--<span class="bespoke discount" style="display:none;"
+                ms-css-display="el.priceType==2||el.priceType==3?'inline-block':'inline-block'"
+                >券</span>-->
+              </div>
+            </div>
+            <div class="right" ms-if="el.remain>0">
+              <img src="../images/arrow-left.svg" alt="">
+            </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <script src="../../lib/jquery/jquery-2.1.4.min.js"></script>
+  <script>
+    let ua = navigator.userAgent.toLowerCase();
+    if(ua.match(/MicroMessenger/i)=="micromessenger") {
+      $.getScript("../../lib/weixinapi/jweixin-1.0.0.js");
+    }
+  </script>
+  <script src="../../lib/avalon/avalon.min.js"></script>
+  <script src="/webchatpay/scripts/ecshop_hospital_list_crtl.js"></script>
+</body>
+</html>

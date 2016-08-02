@@ -26,3 +26,17 @@ export function webchatActivityInfo(tokenId,activityId) {
     activityId:activityId
   });
 }
+
+/**
+ * 获得活动商城的订单选项
+ * @param  {[type]} tokenId    [用户凭证]
+ * @param  {[type]} activityId [活动的ID]
+ * @return {[type]}            [description]
+ */
+export function webchatActivityTicket(tokenId,activityId) {
+  return http.sendHttpRequest({
+    method:'webchatActivityTicket',
+    tokenId:tokenId,
+    activityId:activityId
+  });
+}
